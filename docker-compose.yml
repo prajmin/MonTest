@@ -45,7 +45,7 @@ services:
     ports:
       - 9093:9093
     volumes:
-      - ./alertmanager/:/etc/alertmanager/
+      - ./alertmanager/:/etc/alertmanager/:z
     restart: always
     command:
       - '--config.file=/etc/alertmanager/config.yml'
@@ -58,10 +58,11 @@ services:
     volumes:
     - /:/rootfs:ro
     - /var/run:/var/run:rw
-#   - /sys:/sys:ro
-    - /var/lib/docker/:/var/lib/docker:ro
+    - /sys:/sys:ro
+    - /var/lib/docker:/var/lib/docker:ro
+    - /dev/disk/:/dev/disk:ro
     - /sys/fs/cgroup:/cgroup:ro
-    - /sys/fs/cgroup/cpu,cpuacct:/sys/fs/cgroup/cpuacct,cpu
+    - /sys/fs/cgroup/cpu,cpuacct:/sys/fs/cgroup/cpuacct,cpu:rw
 
   grafana:
     image: grafana/grafana
@@ -70,7 +71,7 @@ services:
     ports:
       - 3030:3000
     volumes:
-      - grafana_data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana:z
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     env_file:
       - ./grafana/config.monitoring
