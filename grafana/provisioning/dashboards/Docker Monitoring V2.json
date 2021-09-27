@@ -2057,7 +2057,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Docker Prometheus Monitoring",
-  "uid": "64nrElFmk",
-  "version": 1
+  "title": "Host and Docker Monitoring V2",
+  "uid": "64a4aF9k",
+  "version": 2
 }
