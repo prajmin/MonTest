@@ -10,7 +10,7 @@ services:
     image: prom/prometheus:v2.30.0
     user: root
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - ./prometheus/:/etc/prometheus/:z
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
