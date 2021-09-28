@@ -19,10 +19,10 @@ services:
     ports:
       - 9090:9090
     links:
-      - container-exporter:container-exporter
+      - cadvisor:cadvisor
       - alertmanager:alertmanager
     depends_on:
-      - container-exporter
+      - cadvisor
     restart: always
 
   node-exporter:
