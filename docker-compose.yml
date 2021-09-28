@@ -10,7 +10,7 @@ services:
     image: prom/prometheus:v2.30.0
     volumes:
       - ./prometheus/:/etc/prometheus/:z
-      - prometheus_data:/prometheus
+      - prometheus_data:/prometheus:z
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -19,10 +19,10 @@ services:
     ports:
       - 9090:9090
     links:
-      - cadvisor:cadvisor
+      - container-exporter:container-exporter
       - alertmanager:alertmanager
     depends_on:
-      - cadvisor
+      - container-exporter
     restart: always
 
   node-exporter:
@@ -31,8 +31,8 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
-    command: 
-      - '--path.procfs=/host/proc' 
+    command:
+      - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - --collector.filesystem.ignored-mount-points
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
@@ -67,7 +67,7 @@ services:
       - 3030:3000
     volumes:
       - grafana_data:/var/lib/grafana:z
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/provisioning/:/etc/grafana/provisioning/:z
     env_file:
       - ./grafana/config.monitoring
     restart: always
