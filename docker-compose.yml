@@ -51,14 +51,6 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
 
-  container-exporter:
-    image: prom/container-exporter
-    ports:
-      - 9104:9104
-    volumes:
-      - /sys/fs/cgroup:/cgroup
-      - /var/run/docker.sock:/var/run/docker.sock
-
   grafana:
     image: grafana/grafana
     depends_on:
