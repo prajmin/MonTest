@@ -36,7 +36,6 @@ scrape_configs:
     static_configs:
          - targets: ['localhost:9090']
 
-
   - job_name: 'cadvisor'
 
     # Override the global default and scrape targets from this job every 5 seconds.
@@ -49,7 +48,7 @@ scrape_configs:
       port: 8080
 
     static_configs:
-      - targets: ['cadvisor:8080']
+         - targets: ['cadvisor:8080']
 
   - job_name: 'node-exporter'
 
@@ -63,4 +62,4 @@ scrape_configs:
       port: 9100
 
     static_configs:
-      - targets: ['node-exporter:9100']
+         - targets: ['node-exporter:9100']
