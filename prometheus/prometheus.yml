@@ -51,6 +51,17 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
+    relabel_configs:
+      - action: replace
+        source_labels: [instance]
+        target_label: name
+    
+    metric_relabel_configs:
+      - action: replace
+        source_labels: [instance]
+        target_label: name
+      
+
   - job_name: 'node-exporter'
 
     # Override the global default and scrape targets from this job every 5 seconds.
